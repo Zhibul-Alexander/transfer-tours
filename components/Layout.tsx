@@ -23,12 +23,13 @@ const HeaderInner = styled.div`
   max-width: ${(p) => p.theme.maxWidth}px;
   margin: 0 auto;
   padding: 14px 16px;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
 
   @media (max-width: 768px) {
+    display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 12px;
@@ -36,15 +37,44 @@ const HeaderInner = styled.div`
 `;
 
 const HeaderRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex: 1;
+  display: none;
 
   @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     width: 100%;
     justify-content: space-between;
-    flex: none;
+    order: 1;
+  }
+`;
+
+const MobileBrand = styled.a`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  strong {
+    font-size: 14px;
+    letter-spacing: 0.2px;
+  }
+
+  span {
+    display: none;
+  }
+`;
+
+const MobileLang = styled.div`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    gap: 8px;
+    align-items: center;
   }
 `;
 
@@ -52,6 +82,7 @@ const Brand = styled.a`
   display: flex;
   flex-direction: column;
   gap: 2px;
+  flex-shrink: 0;
 
   strong {
     font-size: 14px;
@@ -66,19 +97,23 @@ const Brand = styled.a`
       display: none;
     }
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Nav = styled.nav`
   display: flex;
   gap: 10px;
   align-items: center;
-  flex-shrink: 0;
+  justify-content: center;
 
   @media (max-width: 768px) {
     width: 100%;
     justify-content: space-between;
     gap: 8px;
-    flex-shrink: 1;
+    order: 2;
   }
 `;
 
@@ -107,6 +142,11 @@ const Lang = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const LangBtn = styled.button<{ $active?: boolean }>`
@@ -186,19 +226,11 @@ export default function Layout({ content, children }: Props) {
     <Wrap>
       <Header>
         <HeaderInner>
-          <HeaderRow>
-            <Link href="/" passHref legacyBehavior>
-              <Brand>
-                <strong>{content.brand.name}</strong>
-                <span>{content.brand.tagline}</span>
-              </Brand>
-            </Link>
-
-            <Lang>
-              <LangBtn onClick={() => switchLocale("ru")} $active={(router.locale || "ru") === "ru"}>RU</LangBtn>
-              <LangBtn onClick={() => switchLocale("en")} $active={(router.locale || "ru") === "en"}>EN</LangBtn>
-            </Lang>
-          </HeaderRow>
+          <Link href="/" passHref legacyBehavior>
+            <Brand>
+              <strong>{content.brand.name}</strong>
+            </Brand>
+          </Link>
 
           <Nav>
             <Link href="/" passHref legacyBehavior>
@@ -211,6 +243,24 @@ export default function Layout({ content, children }: Props) {
               <NavLink $active={isActive("/tours")}>{content.nav.tours}</NavLink>
             </Link>
           </Nav>
+
+          <Lang>
+            <LangBtn onClick={() => switchLocale("ru")} $active={(router.locale || "ru") === "ru"}>RU</LangBtn>
+            <LangBtn onClick={() => switchLocale("en")} $active={(router.locale || "ru") === "en"}>EN</LangBtn>
+          </Lang>
+
+          <HeaderRow>
+            <Link href="/" passHref legacyBehavior>
+              <MobileBrand>
+                <strong>{content.brand.name}</strong>
+              </MobileBrand>
+            </Link>
+
+            <MobileLang>
+              <LangBtn onClick={() => switchLocale("ru")} $active={(router.locale || "ru") === "ru"}>RU</LangBtn>
+              <LangBtn onClick={() => switchLocale("en")} $active={(router.locale || "ru") === "en"}>EN</LangBtn>
+            </MobileLang>
+          </HeaderRow>
         </HeaderInner>
       </Header>
 
