@@ -39,11 +39,11 @@ export default function Home({ content }: Props) {
             <Card>
               <H2>{content.locale === "ru" ? "Быстрые ссылки" : "Quick links"}</H2>
               <P>{content.locale === "ru"
-                ? "Открой нужный раздел — цены/маршруты или экскурсии."
+                ? "Открой нужный раздел."
                 : "Open what you need — routes/prices or tours."}</P>
               <div style={{ display: "grid", gap: 12 }}>
                 {content.home.cards.map((c) => (
-                  <LinkCard key={c.href} href={c.href} title={c.title} text={c.text} />
+                  <LinkCard key={c.href} href={c.href} title={c.title} text={c.text} locale={content.locale} />
                 ))}
               </div>
             </Card>

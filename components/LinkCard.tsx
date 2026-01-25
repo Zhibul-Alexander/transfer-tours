@@ -25,16 +25,16 @@ const Text = styled.div`
   line-height: 1.55;
 `;
 
-type Props = { href: string; title: string; text: string };
+type Props = { href: string; title: string; text: string; locale?: string };
 
-export default function LinkCard({ href, title, text }: Props) {
+export default function LinkCard({ href, title, text, locale }: Props) {
   return (
     <Link href={href} passHref legacyBehavior>
       <Card>
         <Title>{title}</Title>
-        <Text>{text}</Text>
+        {text && <Text>{text}</Text>}
         <div style={{ fontSize: 12, color: "#4DA3FF" }}>
-          Open →
+          {locale === "ru" ? "Открыть" : "Open"} →
         </div>
       </Card>
     </Link>

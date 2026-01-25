@@ -24,12 +24,12 @@ const en: SiteContent = {
     cards: [
       {
         title: "Transfers and Rides",
-        text: "Routes, prices from…, types of transport, and trip conditions.",
+        text: "",
         href: "/transfers",
       },
       {
         title: "Tours in Georgia",
-        text: "Routes tailored to your vibe: top-3 and all destinations.",
+        text: "",
         href: "/tours",
       },
     ],
