@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { RoutePrice, SiteContent } from "../content/types";
+import type { RoutePrice, SiteContent } from "../content/types";
 
 const TableWrap = styled.div`
   overflow-x: auto;
@@ -91,7 +91,7 @@ const RouteTo = styled.span`
   color: ${(p) => p.theme.colors.text};
 `;
 
-const RoutePrice = styled.div`
+const RoutePriceText = styled.div`
   font-size: 18px;
   font-weight: 700;
   color: ${(p) => p.theme.colors.text};
@@ -154,7 +154,7 @@ export default function RoutesTable({ content, routes }: Props) {
                 <RouteArrow>→</RouteArrow>
                 <RouteTo>{r.to}</RouteTo>
               </RoutePath>
-              <RoutePrice>{r.priceFrom}</RoutePrice>
+              <RoutePriceText>{r.priceFrom}</RoutePriceText>
             </RouteHeader>
             <RouteFooter>
               <RouteLabel>{content.locale === "ru" ? "Транспорт" : "Vehicle"}</RouteLabel>
