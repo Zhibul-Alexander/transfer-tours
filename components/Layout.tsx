@@ -207,19 +207,21 @@ const FooterContacts = styled.div`
 type Props = {
   content: SiteContent;
   children: React.ReactNode;
+  locale: string;
 };
 
-export default function Layout({ content, children }: Props) {
+export default function Layout({ content, children, locale }: Props) {
   const router = useRouter();
 
-  const switchLocale = async (nextLocale: "ru" | "en") => {
-    await router.push(router.asPath, router.asPath, { locale: nextLocale });
+  const switchLocale = (nextLocale: "ru" | "en") => {
+    const currentPath = router.asPath.replace(`/${locale}`, '');
+    router.push(`/${nextLocale}${currentPath === '/' ? '' : currentPath}`);
   };
 
   const isActive = (href: string) => {
-    const p = router.pathname;
-    if (href === "/") return p === "/";
-    return p === href;
+    const currentPath = router.asPath.replace(`/${locale}`, '');
+    if (href === "/") return currentPath === "/" || currentPath === "";
+    return currentPath === href;
   };
 
   const scrollToContacts = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -234,20 +236,20 @@ export default function Layout({ content, children }: Props) {
     <Wrap>
       <Header>
         <HeaderInner>
-          <Link href="/" passHref legacyBehavior>
+          <Link href={`/${locale}`} passHref legacyBehavior>
             <Brand>
               <strong>{content.brand.name}</strong>
             </Brand>
           </Link>
 
           <Nav>
-            <Link href="/" passHref legacyBehavior>
+            <Link href={`/${locale}`} passHref legacyBehavior>
               <NavLink $active={isActive("/")}>{content.nav.home}</NavLink>
             </Link>
-            <Link href="/transfers" passHref legacyBehavior>
+            <Link href={`/${locale}/transfers`} passHref legacyBehavior>
               <NavLink $active={isActive("/transfers")}>{content.nav.transfers}</NavLink>
             </Link>
-            <Link href="/tours" passHref legacyBehavior>
+            <Link href={`/${locale}/tours`} passHref legacyBehavior>
               <NavLink $active={isActive("/tours")}>{content.nav.tours}</NavLink>
             </Link>
             <NavLink href="#contacts" onClick={scrollToContacts}>
@@ -256,20 +258,20 @@ export default function Layout({ content, children }: Props) {
           </Nav>
 
           <Lang>
-            <LangBtn onClick={() => switchLocale("ru")} $active={(router.locale || "ru") === "ru"}>RU</LangBtn>
-            <LangBtn onClick={() => switchLocale("en")} $active={(router.locale || "ru") === "en"}>EN</LangBtn>
+            <LangBtn onClick={() => switchLocale("ru")} $active={locale === "ru"}>RU</LangBtn>
+            <LangBtn onClick={() => switchLocale("en")} $active={locale === "en"}>EN</LangBtn>
           </Lang>
 
           <HeaderRow>
-            <Link href="/" passHref legacyBehavior>
+            <Link href={`/${locale}`} passHref legacyBehavior>
               <MobileBrand>
                 <strong>{content.brand.name}</strong>
               </MobileBrand>
             </Link>
 
             <MobileLang>
-              <LangBtn onClick={() => switchLocale("ru")} $active={(router.locale || "ru") === "ru"}>RU</LangBtn>
-              <LangBtn onClick={() => switchLocale("en")} $active={(router.locale || "ru") === "en"}>EN</LangBtn>
+              <LangBtn onClick={() => switchLocale("ru")} $active={locale === "ru"}>RU</LangBtn>
+              <LangBtn onClick={() => switchLocale("en")} $active={locale === "en"}>EN</LangBtn>
             </MobileLang>
           </HeaderRow>
         </HeaderInner>

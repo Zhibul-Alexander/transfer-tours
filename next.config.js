@@ -3,16 +3,13 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   trailingSlash: true,
-  i18n: {
-    locales: ['ru', 'en'],
-    defaultLocale: 'ru',
-    localeDetection: false, // Отключаем автоматическое определение локали для Cloudflare Pages
-  },
+  output: 'export', // Статический экспорт для Cloudflare Pages
   compiler: {
     styledComponents: true,
   },
-  // Для Cloudflare Pages важно не использовать output: 'export'
-  // так как это сломает i18n routing
+  images: {
+    unoptimized: true, // Требуется для статического экспорта
+  },
 };
 
 module.exports = nextConfig;

@@ -36,13 +36,13 @@ npm run start
 
 ## Деплой на Cloudflare Pages
 
+Проект настроен для **статического экспорта** (Static HTML Export) с папкой `out`.
+
 ### Настройка в интерфейсе Cloudflare Pages:
 
-1. **Framework preset**: Выбери **Next.js** (НЕ "Next.js Static HTML Export"!)
-   - ⚠️ Важно: Static HTML Export сломает i18n routing (`/ru`, `/en`)
-   - Обычный Next.js preset поддерживает SSG и i18n корректно
+1. **Framework preset**: Выбери **Next.js Static HTML Export**
 2. **Build command**: `npm run build`
-3. **Build output directory**: Оставь пустым (Cloudflare автоматически определит для Next.js)
+3. **Build output directory**: `out` (важно указать именно `out`)
 4. **Root directory**: `/` (по умолчанию)
 5. **Node version**: `20` или выше
    - Перейди в **Settings** → **Environment variables**
@@ -57,29 +57,17 @@ npm run start
 
 ### Важно:
 
-- Проект использует SSG (Static Site Generation) через `getStaticProps`
-- Cloudflare Pages автоматически обработает Next.js сборку
-- После деплоя проверь, что sitemap (`/sitemap.xml`) и robots.txt генерируются корректно
+- Проект использует статический экспорт (`output: 'export'` в `next.config.js`)
+- После `npm run build` все файлы генерируются в папку `out/`
+- Все страницы статические HTML файлы, не требуется Node.js сервер
+- i18n реализован через динамические роуты: `/ru`, `/en`, `/ru/transfers`, `/en/transfers` и т.д.
+- Корневой путь `/` автоматически редиректит на `/ru`
 
-### Устранение ошибки 404:
+### Структура страниц после сборки:
 
-Если после деплоя видишь ошибку "This page can't be found":
-
-1. **Проверь Framework preset**: Должен быть выбран **Next.js** (НЕ "Next.js Static HTML Export"!)
-   - Static HTML Export сломает i18n routing и вызовет 404 ошибки
-   - Если выбран Static HTML Export, измени на обычный Next.js preset
-
-2. **Проверь Build output directory**: Должен быть пустым или автоматически определен Cloudflare
-   - НЕ указывай `.next` или `out` вручную
-
-3. **Проверь, что все страницы генерируются**: После билда должны быть созданы страницы для всех локалей:
-   - `/ru` и `/en` (главная)
-   - `/ru/transfers` и `/en/transfers`
-   - `/ru/tours` и `/en/tours`
-
-4. **Если проблема сохраняется**: Попробуй пересобрать проект с очисткой кеша:
-   - В Cloudflare Pages: Settings → Builds & deployments → Clear build cache
-   - Затем запусти новый деплой
+- `/ru` и `/en` (главная)
+- `/ru/transfers` и `/en/transfers`
+- `/ru/tours` и `/en/tours`
 
 ## SEO
 - `components/Seo.tsx` – title/description/canonical/OG/Twitter + JSON-LD.

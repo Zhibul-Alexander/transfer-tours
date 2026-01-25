@@ -17,12 +17,21 @@ function absoluteUrl(base: string, path: string) {
 
 export default function Seo({ content, title, description, path = "/" }: Props) {
   const router = useRouter();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://example.com";
-  const locale = router.locale || content.locale;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://example.com";
+  const locale = content.locale;
+  
+  // path уже содержит локаль (например /ru или /ru/transfers)
+  // Если передан относительный путь, добавляем локаль
+  const canonicalPath = path.startsWith('/ru') || path.startsWith('/en') 
+    ? path 
+    : `/${locale}${path === '/' ? '' : path}`;
+  const canonical = absoluteUrl(siteUrl, canonicalPath);
+  
+  // Определяем путь без локали для hreflang
+  const pathWithoutLocale = canonicalPath.replace(/^\/(ru|en)/, '') || '/';
 
   const fullTitle = title ? `${title} — ${content.seo.siteName}` : content.seo.defaultTitle;
   const fullDescription = description || content.seo.defaultDescription;
-  const canonical = absoluteUrl(siteUrl, locale === "ru" ? path : `/${locale}${path}`);
 
   const ogImage = absoluteUrl(siteUrl, "/images/og.svg");
 
@@ -77,9 +86,9 @@ export default function Seo({ content, title, description, path = "/" }: Props) 
       <meta name="twitter:image" content={ogImage} />
 
       {/* Language alternates */}
-      <link rel="alternate" hrefLang="ru" href={absoluteUrl(siteUrl, path)} />
-      <link rel="alternate" hrefLang="en" href={absoluteUrl(siteUrl, `/en${path}`)} />
-      <link rel="alternate" hrefLang="x-default" href={absoluteUrl(siteUrl, path)} />
+      <link rel="alternate" hrefLang="ru" href={absoluteUrl(siteUrl, `/ru${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`)} />
+      <link rel="alternate" hrefLang="en" href={absoluteUrl(siteUrl, `/en${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`)} />
+      <link rel="alternate" hrefLang="x-default" href={absoluteUrl(siteUrl, `/ru${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`)} />
 
       {/* JSON-LD */}
       <script

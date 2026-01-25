@@ -1,25 +1,25 @@
-import type { GetStaticProps } from "next";
-import Layout from "../components/Layout";
-import Container from "../components/Container";
-import Hero from "../components/Hero";
-import Seo from "../components/Seo";
-import { Card, Grid2, H2, List, P, Section } from "../components/Section";
-import RoutesTable from "../components/RoutesTable";
-import Reviews from "../components/Reviews";
-import Contacts from "../components/Contacts";
-import { getContent } from "../content/getContent";
-import { SiteContent } from "../content/types";
+import type { GetStaticPaths, GetStaticProps } from "next";
+import Layout from "../../components/Layout";
+import Container from "../../components/Container";
+import Hero from "../../components/Hero";
+import Seo from "../../components/Seo";
+import { Card, Grid2, H2, List, P, Section } from "../../components/Section";
+import RoutesTable from "../../components/RoutesTable";
+import Reviews from "../../components/Reviews";
+import Contacts from "../../components/Contacts";
+import { getContent } from "../../content/getContent";
+import { SiteContent } from "../../content/types";
 
-type Props = { content: SiteContent };
+type Props = { content: SiteContent; locale: string };
 
-export default function TransfersPage({ content }: Props) {
+export default function TransfersPage({ content, locale }: Props) {
   return (
-    <Layout content={content}>
+    <Layout content={content} locale={locale}>
       <Seo
         content={content}
         title={content.transfers.title}
         description={content.transfers.subtitle}
-        path="/transfers"
+        path={`/${locale}/transfers`}
       />
       <Container>
         <Hero
@@ -68,10 +68,22 @@ export default function TransfersPage({ content }: Props) {
   );
 }
 
-export const getStaticProps: GetStaticProps<Props> = async ({ locale }) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [
+      { params: { locale: 'ru' } },
+      { params: { locale: 'en' } },
+    ],
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+  const locale = params?.locale as string || 'ru';
   return {
     props: {
       content: getContent(locale),
+      locale,
     },
   };
 };

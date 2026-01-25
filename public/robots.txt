@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
+# Sitemap будет автоматически обновлен next-sitemap после сборки
+# Укажи SITE_URL в переменных окружения для правильной генерации
 Sitemap: https://example.com/sitemap.xml
