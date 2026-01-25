@@ -23,6 +23,10 @@ const Table = styled.table`
 
   th { color: ${(p) => p.theme.colors.muted}; font-weight: 600; }
   tr:last-child td { border-bottom: none; }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Badge = styled.span<{ $variant?: "car" | "minivan" }>`
@@ -34,6 +38,78 @@ const Badge = styled.span<{ $variant?: "car" | "minivan" }>`
   background: ${(p) => (p.$variant === "minivan" ? "rgba(124,92,255,0.12)" : "rgba(77,163,255,0.12)")};
 `;
 
+const CardsContainer = styled.div`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: grid;
+    gap: 12px;
+  }
+`;
+
+const RouteCard = styled.div`
+  border: 1px solid ${(p) => p.theme.colors.border};
+  border-radius: 16px;
+  padding: 16px;
+  background: ${(p) => p.theme.colors.card};
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const RouteHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+`;
+
+const RoutePath = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+`;
+
+const RouteFrom = styled.span`
+  font-weight: 600;
+  font-size: 15px;
+  color: ${(p) => p.theme.colors.text};
+`;
+
+const RouteArrow = styled.span`
+  color: ${(p) => p.theme.colors.muted};
+  font-size: 14px;
+  flex-shrink: 0;
+`;
+
+const RouteTo = styled.span`
+  font-weight: 600;
+  font-size: 15px;
+  color: ${(p) => p.theme.colors.text};
+`;
+
+const RoutePrice = styled.div`
+  font-size: 18px;
+  font-weight: 700;
+  color: ${(p) => p.theme.colors.text};
+`;
+
+const RouteFooter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+`;
+
+const RouteLabel = styled.span`
+  font-size: 12px;
+  color: ${(p) => p.theme.colors.muted};
+`;
+
 type Props = {
   content: SiteContent;
   routes: RoutePrice[];
@@ -41,31 +117,54 @@ type Props = {
 
 export default function RoutesTable({ content, routes }: Props) {
   return (
-    <TableWrap>
-      <Table>
-        <thead>
-          <tr>
-            <th>{content.locale === "ru" ? "Откуда" : "From"}</th>
-            <th>{content.locale === "ru" ? "Куда" : "To"}</th>
-            <th>{content.locale === "ru" ? "Транспорт" : "Vehicle"}</th>
-            <th>{content.locale === "ru" ? "Цена от" : "Price from"}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {routes.map((r, idx) => (
-            <tr key={idx}>
-              <td>{r.from}</td>
-              <td>{r.to}</td>
-              <td>
-                <Badge $variant={r.transport}>
-                  {r.transport === "car" ? content.transfers.transportTitles.car : content.transfers.transportTitles.minivan}
-                </Badge>
-              </td>
-              <td><strong>{r.priceFrom}</strong></td>
+    <>
+      <TableWrap>
+        <Table>
+          <thead>
+            <tr>
+              <th>{content.locale === "ru" ? "Откуда" : "From"}</th>
+              <th>{content.locale === "ru" ? "Куда" : "To"}</th>
+              <th>{content.locale === "ru" ? "Транспорт" : "Vehicle"}</th>
+              <th>{content.locale === "ru" ? "Цена от" : "Price from"}</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-    </TableWrap>
+          </thead>
+          <tbody>
+            {routes.map((r, idx) => (
+              <tr key={idx}>
+                <td>{r.from}</td>
+                <td>{r.to}</td>
+                <td>
+                  <Badge $variant={r.transport}>
+                    {r.transport === "car" ? content.transfers.transportTitles.car : content.transfers.transportTitles.minivan}
+                  </Badge>
+                </td>
+                <td><strong>{r.priceFrom}</strong></td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </TableWrap>
+
+      <CardsContainer>
+        {routes.map((r, idx) => (
+          <RouteCard key={idx}>
+            <RouteHeader>
+              <RoutePath>
+                <RouteFrom>{r.from}</RouteFrom>
+                <RouteArrow>→</RouteArrow>
+                <RouteTo>{r.to}</RouteTo>
+              </RoutePath>
+              <RoutePrice>{r.priceFrom}</RoutePrice>
+            </RouteHeader>
+            <RouteFooter>
+              <RouteLabel>{content.locale === "ru" ? "Транспорт" : "Vehicle"}</RouteLabel>
+              <Badge $variant={r.transport}>
+                {r.transport === "car" ? content.transfers.transportTitles.car : content.transfers.transportTitles.minivan}
+              </Badge>
+            </RouteFooter>
+          </RouteCard>
+        ))}
+      </CardsContainer>
+    </>
   );
 }

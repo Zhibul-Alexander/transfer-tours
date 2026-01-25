@@ -27,6 +27,25 @@ const HeaderInner = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+`;
+
+const HeaderRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: space-between;
+    flex: none;
+  }
 `;
 
 const Brand = styled.a`
@@ -42,6 +61,10 @@ const Brand = styled.a`
   span {
     font-size: 12px;
     color: ${(p) => p.theme.colors.muted};
+    
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 `;
 
@@ -49,6 +72,14 @@ const Nav = styled.nav`
   display: flex;
   gap: 10px;
   align-items: center;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    flex-shrink: 1;
+  }
 `;
 
 const NavLink = styled.a<{ $active?: boolean }>`
@@ -59,8 +90,17 @@ const NavLink = styled.a<{ $active?: boolean }>`
   background: ${(p) => (p.$active ? "rgba(77,163,255,0.12)" : "transparent")};
   color: ${(p) => (p.$active ? p.theme.colors.text : "rgba(30,41,59,0.85)")};
   transition: transform 0.1s ease;
+  text-decoration: none;
+  white-space: nowrap;
 
   &:hover { transform: translateY(-1px); }
+
+  @media (max-width: 768px) {
+    flex: 1;
+    text-align: center;
+    padding: 10px 8px;
+    font-size: 12px;
+  }
 `;
 
 const Lang = styled.div`
@@ -146,12 +186,19 @@ export default function Layout({ content, children }: Props) {
     <Wrap>
       <Header>
         <HeaderInner>
-          <Link href="/" passHref legacyBehavior>
-            <Brand>
-              <strong>{content.brand.name}</strong>
-              <span>{content.brand.tagline}</span>
-            </Brand>
-          </Link>
+          <HeaderRow>
+            <Link href="/" passHref legacyBehavior>
+              <Brand>
+                <strong>{content.brand.name}</strong>
+                <span>{content.brand.tagline}</span>
+              </Brand>
+            </Link>
+
+            <Lang>
+              <LangBtn onClick={() => switchLocale("ru")} $active={(router.locale || "ru") === "ru"}>RU</LangBtn>
+              <LangBtn onClick={() => switchLocale("en")} $active={(router.locale || "ru") === "en"}>EN</LangBtn>
+            </Lang>
+          </HeaderRow>
 
           <Nav>
             <Link href="/" passHref legacyBehavior>
@@ -164,11 +211,6 @@ export default function Layout({ content, children }: Props) {
               <NavLink $active={isActive("/tours")}>{content.nav.tours}</NavLink>
             </Link>
           </Nav>
-
-          <Lang>
-            <LangBtn onClick={() => switchLocale("ru")} $active={(router.locale || "ru") === "ru"}>RU</LangBtn>
-            <LangBtn onClick={() => switchLocale("en")} $active={(router.locale || "ru") === "en"}>EN</LangBtn>
-          </Lang>
         </HeaderInner>
       </Header>
 

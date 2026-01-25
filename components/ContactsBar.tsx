@@ -15,17 +15,33 @@ const Inner = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 `;
 
 const Hint = styled.div`
   font-size: 12px;
   color: ${(p) => p.theme.colors.muted};
+
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 `;
 
 const Actions = styled.div`
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    width: 100%;
+  }
 `;
 
 const Btn = styled.a<{ $variant?: "primary" | "secondary" }>`
