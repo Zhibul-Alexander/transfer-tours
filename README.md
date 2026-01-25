@@ -60,7 +60,26 @@ npm run start
 - Проект использует SSG (Static Site Generation) через `getStaticProps`
 - Cloudflare Pages автоматически обработает Next.js сборку
 - После деплоя проверь, что sitemap (`/sitemap.xml`) и robots.txt генерируются корректно
-- Если возникнут проблемы, попробуй выбрать **Next.js (Static HTML Export)** в качестве preset
+
+### Устранение ошибки 404:
+
+Если после деплоя видишь ошибку "This page can't be found":
+
+1. **Проверь Framework preset**: Должен быть выбран **Next.js** (НЕ "Next.js Static HTML Export"!)
+   - Static HTML Export сломает i18n routing и вызовет 404 ошибки
+   - Если выбран Static HTML Export, измени на обычный Next.js preset
+
+2. **Проверь Build output directory**: Должен быть пустым или автоматически определен Cloudflare
+   - НЕ указывай `.next` или `out` вручную
+
+3. **Проверь, что все страницы генерируются**: После билда должны быть созданы страницы для всех локалей:
+   - `/ru` и `/en` (главная)
+   - `/ru/transfers` и `/en/transfers`
+   - `/ru/tours` и `/en/tours`
+
+4. **Если проблема сохраняется**: Попробуй пересобрать проект с очисткой кеша:
+   - В Cloudflare Pages: Settings → Builds & deployments → Clear build cache
+   - Затем запусти новый деплой
 
 ## SEO
 - `components/Seo.tsx` – title/description/canonical/OG/Twitter + JSON-LD.
