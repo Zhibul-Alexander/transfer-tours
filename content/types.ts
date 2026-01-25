@@ -82,6 +82,7 @@ export type SiteContent = {
       reviews?: string;
       chooseCar?: string;
       whatsappMessage?: string;
+      tours?: string;
     };
   };
   seo: {
