@@ -56,7 +56,7 @@ export default function ToursPage({ content }: Props) {
           <Reviews items={content.reviews.items} />
         </Section>
 
-        <Section>
+        <Section id="contacts">
           <H2>{content.contacts.title}</H2>
           <P>{content.contacts.hint}</P>
           <Contacts data={content.contacts.data} content={content} />

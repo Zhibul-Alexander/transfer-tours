@@ -222,6 +222,14 @@ export default function Layout({ content, children }: Props) {
     return p === href;
   };
 
+  const scrollToContacts = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const contactsSection = document.getElementById("contacts");
+    if (contactsSection) {
+      contactsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <Wrap>
       <Header>
@@ -242,6 +250,9 @@ export default function Layout({ content, children }: Props) {
             <Link href="/tours" passHref legacyBehavior>
               <NavLink $active={isActive("/tours")}>{content.nav.tours}</NavLink>
             </Link>
+            <NavLink href="#contacts" onClick={scrollToContacts}>
+              {content.locale === "ru" ? "Контакты" : "Contacts"}
+            </NavLink>
           </Nav>
 
           <Lang>
