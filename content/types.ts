@@ -13,7 +13,8 @@ export type FeaturedTour = {
   title: string;
   duration: string;
   highlight: string;
-  image: string; // path in /public
+  image: string; // path in /public (для обратной совместимости)
+  images?: string[]; // массив изображений для слайдера
 };
 
 export type Review = {
@@ -66,7 +67,11 @@ export type SiteContent = {
     featuredTitle: string;
     featured: FeaturedTour[];
     allTitle: string;
-    allDirections: string[];
+    allDirectionsSubtitle: string;
+    allRoutes: Array<{
+      name: string;
+      description: string;
+    }>;
   };
   reviews: { title: string; items: Review[]; };
   contacts: { 

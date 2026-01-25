@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import Container from "../components/Container";
 import Hero from "../components/Hero";
 import Seo from "../components/Seo";
-import { Card, Grid2, H2, List, P, Section } from "../components/Section";
+import { Card, H2, List, P, Section } from "../components/Section";
 import ToursGrid from "../components/ToursGrid";
 import Reviews from "../components/Reviews";
 import Contacts from "../components/Contacts";
@@ -35,20 +35,21 @@ export default function ToursPage({ content }: Props) {
         </Section>
 
         <Section>
-          <Grid2>
-            <Card>
-              <H2>{content.tours.allTitle}</H2>
-              <P>{content.locale === "ru"
-                ? "Если вы не нашли нужное направление — напишите, сделаем индивидуальный маршрут."
-                : "If you don’t see your direction — message us and we’ll tailor a custom route."}</P>
-            </Card>
-            <Card>
-              <H2>{content.locale === "ru" ? "Список направлений" : "Directions list"}</H2>
+          <Card>
+            <H2>{content.tours.allTitle}</H2>
+            <P>{content.tours.allDirectionsSubtitle}</P>
+            <div style={{ marginTop: "2rem" }}>
               <List>
-                {content.tours.allDirections.map((d, i) => <li key={i}>{d}</li>)}
+                {content.tours.allRoutes.map((route, index) => (
+                  <li key={index} style={{ marginBottom: "0.75rem" }}>
+                    <strong>{route.name}</strong>
+                    <br />
+                    <span style={{ color: "var(--text-secondary, #666)" }}>{route.description}</span>
+                  </li>
+                ))}
               </List>
-            </Card>
-          </Grid2>
+            </div>
+          </Card>
         </Section>
 
         <Section>
