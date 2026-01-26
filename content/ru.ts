@@ -67,36 +67,31 @@ const ru: SiteContent = {
         title: "Тбилиси → Мцхета → Военно-Грузинская дорога → Казбеги (Степанцминда)", 
         duration: "1 день", 
         highlight: "По пути обычно заезжают в Ананури, на смотровые, в Гудаури, а главная точка — церковь Гергети с видом на Казбек.", 
-        image: "/images/tour1-1.jpg",
+        image: "/images/slider1/tour1-1.webp",
         images: [
-          "/images/tour1-1.jpg",
-          "/images/tour1-2.jpg",
-          "/images/tour1-3.jpg",
-          "/images/tour1-4.jpg",
-          "/images/tour1-5.jpg",
-          "/images/tour1-6.jpg",
-          "/images/tour1-7.jpg",
-          "/images/tour1-8.jpg",
-          "/images/tour1-9.jpg",
-          "/images/tour1-10.jpg",
-          "/images/tour1-11.jpg"
-        ]
+          "/images/slider1/tour1-1.webp",
+          "/images/slider1/tour1-2.webp",
+          "/images/slider1/tour1-3.webp",
+          "/images/slider1/tour1-6.webp",
+          "/images/slider1/tour1-7.webp",
+          "/images/slider1/tour1-8.webp",
+          "/images/slider1/tour1-10.webp",
+          "/images/slider1/tour1-11.webp",
+        ],
       },
       { 
         id: "kakheti", 
         title: "Тбилиси → Кахетия (винный регион) → Сигнахи / Телави / Алазанская долина", 
         duration: "1 день", 
         highlight: "Самый вкусный маршрут: винодельни, дегустации, Сигнахи (городок с видами), часто добавляют монастырь Бодбе.", 
-        image: "/images/tour2-1.jpg",
+        image: "/images/slider2/tour2-1.webp",
         images: [
-          "/images/tour2-1.jpg",
-          "/images/tour2-2.jpg",
-          "/images/tour2-3.jpg",
-          "/images/tour2-4.jpg",
-          "/images/tour2-5.jpg",
-          "/images/tour2-6.jpg",
-          "/images/tour2-7.jpg",
-          "/images/tour2-8.jpg"
+          "/images/slider2/tour2-2.webp",
+          "/images/slider2/tour2-4.webp",
+          "/images/slider2/tour2-5.webp",
+          "/images/slider2/tour2-6.webp",
+          "/images/slider2/tour2-7.webp",
+          "/images/slider2/tour2-8.webp"
         ]
       },
       { 
@@ -104,16 +99,15 @@ const ru: SiteContent = {
         title: "Кутаиси или Тбилиси → Сванетия (Местия → Ушгули)", 
         duration: "1 день", 
         highlight: "Горные виды, средневековые сванские башни, хайкинг; классический горный вау-маршрут страны.", 
-        image: "/images/tour3-1.jpg",
+        image: "/images/slider3/tour3-1.webp",
         images: [
-          "/images/tour3-1.jpg",
-          "/images/tour3-2.jpg",
-          "/images/tour3-3.jpg",
-          "/images/tour3-4.jpg",
-          "/images/tour3-5.jpg",
-          "/images/tour3-6.jpg",
-          "/images/tour3-7.jpg",
-          "/images/tour3-8.jpg"
+          "/images/slider3/tour3-1.webp",
+          "/images/slider3/tour3-3.webp",
+          "/images/slider3/tour3-4.webp",
+          "/images/slider3/tour3-5.webp",
+          "/images/slider3/tour3-7.webp",
+          "/images/slider3/tour3-8.webp",
+          "/images/slider3/tour3-9.webp"
         ]
       },
     ],
