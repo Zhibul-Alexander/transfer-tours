@@ -146,6 +146,13 @@ const Modal = styled.div<{ $isOpen: boolean }>`
   justify-content: center;
   padding: 20px;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+
+  /* Добавляем класс для идентификации фона */
+  &.modal-backdrop {
+    /* Стили уже применены выше */
+  }
 `;
 
 const ModalContent = styled.div`
@@ -158,7 +165,8 @@ const ModalContent = styled.div`
   align-items: center;
   justify-content: center;
   cursor: default;
-  pointer-events: none;
+  /* Убираем pointer-events: none, чтобы обработчики кликов работали */
+  pointer-events: auto;
 
   @media (max-width: 768px) {
     width: auto;
@@ -170,10 +178,10 @@ const ModalContent = styled.div`
 
 const ModalImage = styled.div`
   position: relative;
-  width: 90vw;
-  height: 90vh;
   max-width: 90vw;
   max-height: 90vh;
+  width: 90vw;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -191,9 +199,13 @@ const ModalImageWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+  pointer-events: auto;
+  max-width: 100%;
+  max-height: 100%;
 
   img {
     object-fit: cover;
+    pointer-events: auto;
   }
 
   @media (max-width: 768px) {
@@ -220,6 +232,9 @@ const CloseButton = styled.button`
   font-size: 24px;
   color: ${(p) => p.theme.colors.text};
   transition: all 0.2s ease;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 
   &:hover {
     background: white;
@@ -232,6 +247,8 @@ const CloseButton = styled.button`
     font-size: 20px;
     top: 10px;
     right: 10px;
+    min-width: 44px;
+    min-height: 44px;
   }
 `;
 
@@ -254,6 +271,8 @@ const ModalNavButton = styled.button<{ $direction: "prev" | "next" }>`
   color: ${(p) => p.theme.colors.text};
   transition: all 0.2s ease;
   pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 
   &:hover {
     background: white;
@@ -265,6 +284,8 @@ const ModalNavButton = styled.button<{ $direction: "prev" | "next" }>`
     height: 40px;
     font-size: 20px;
     ${(p) => (p.$direction === "prev" ? "left: 10px;" : "right: 10px;")}
+    min-width: 44px;
+    min-height: 44px;
   }
 `;
 
@@ -294,9 +315,23 @@ function TourSlider({ tour, tourIndex }: { tour: FeaturedTour; tourIndex: number
     document.body.style.overflow = "hidden";
   };
 
-  const closeModal = () => {
+  const closeModal = (e?: React.MouseEvent | React.TouchEvent) => {
+    if (e) {
+      e.stopPropagation();
+    }
     setIsModalOpen(false);
     document.body.style.overflow = "unset";
+  };
+
+  const handleModalBackdropClick = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
+    // Закрываем только если клик был по самому Modal (фону), а не по содержимому
+    const target = e.target as HTMLElement;
+    const currentTarget = e.currentTarget as HTMLElement;
+    
+    // Если клик был непосредственно на Modal (фоне), закрываем
+    if (target === currentTarget) {
+      closeModal(e);
+    }
   };
 
   const nextModalImage = () => {
@@ -390,9 +425,64 @@ function TourSlider({ tour, tourIndex }: { tour: FeaturedTour; tourIndex: number
         </Body>
       </Card>
 
-      <Modal $isOpen={isModalOpen} onClick={closeModal}>
-        <ModalContent>
-          <CloseButton onClick={closeModal} aria-label="Close">
+      <Modal 
+        $isOpen={isModalOpen}
+        className="modal-backdrop"
+        onClick={handleModalBackdropClick}
+        onTouchEnd={handleModalBackdropClick}
+      >
+        <ModalContent 
+          className="modal-content"
+          onClick={(e) => {
+            // Закрываем модальное окно при клике на ModalContent (фон вокруг картинки)
+            const target = e.target as HTMLElement;
+            const currentTarget = e.currentTarget as HTMLElement;
+            
+            // Проверяем, что клик был именно на ModalContent, а не на его дочерних элементах
+            if (target === currentTarget) {
+              closeModal(e);
+              return;
+            }
+            
+            // Проверяем, был ли клик на картинке или на кнопке
+            const isImage = target.tagName === 'IMG' || target.closest('img') || target.closest('.modal-image-wrapper');
+            const isButton = target.tagName === 'BUTTON' || target.closest('button');
+            
+            // Если клик был не на картинке и не на кнопке, закрываем модальное окно
+            // ModalImage сам обрабатывает клики по пустым областям внутри себя
+            if (!isImage && !isButton) {
+              closeModal(e);
+            }
+          }}
+          onTouchEnd={(e) => {
+            const target = e.target as HTMLElement;
+            const currentTarget = e.currentTarget as HTMLElement;
+            
+            if (target === currentTarget) {
+              closeModal(e);
+              return;
+            }
+            
+            const isImage = target.tagName === 'IMG' || target.closest('img') || target.closest('.modal-image-wrapper');
+            const isButton = target.tagName === 'BUTTON' || target.closest('button');
+            
+            if (!isImage && !isButton) {
+              closeModal(e);
+            }
+          }}
+        >
+          <CloseButton 
+            onClick={(e) => {
+              e.stopPropagation();
+              closeModal(e);
+            }}
+            onTouchEnd={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              closeModal(e);
+            }}
+            aria-label="Close"
+          >
             ×
           </CloseButton>
           {images.length > 1 && (
@@ -419,8 +509,33 @@ function TourSlider({ tour, tourIndex }: { tour: FeaturedTour; tourIndex: number
               </ModalNavButton>
             </>
           )}
-          <ModalImage onClick={(e) => e.stopPropagation()}>
-            <ModalImageWrapper>
+          <ModalImage 
+            className="modal-image"
+            onClick={(e) => {
+              // Если клик был на пустой области ModalImage (не на картинке), закрываем модальное окно
+              const target = e.target as HTMLElement;
+              const isImage = target.tagName === 'IMG' || target.closest('img') || target.closest('.modal-image-wrapper');
+              
+              // Если клик был не на картинке, значит это пустая область - закрываем
+              if (!isImage) {
+                closeModal(e);
+              } else {
+                // Если клик был на картинке, останавливаем всплытие
+                e.stopPropagation();
+              }
+            }}
+            onTouchEnd={(e) => {
+              const target = e.target as HTMLElement;
+              const isImage = target.tagName === 'IMG' || target.closest('img') || target.closest('.modal-image-wrapper');
+              
+              if (!isImage) {
+                closeModal(e);
+              } else {
+                e.stopPropagation();
+              }
+            }}
+          >
+            <ModalImageWrapper className="modal-image-wrapper">
               <Image
                 src={images[modalImageIndex]}
                 alt={`${tour.title} - ${modalImageIndex + 1}`}
