@@ -242,9 +242,34 @@ export default function Layout({ content, children, locale }: Props) {
   };
 
   const isActive = (href: string) => {
-    const currentPath = router.asPath.replace(`/${locale}`, '');
-    if (href === "/") return currentPath === "/" || currentPath === "";
-    return currentPath === href;
+    // Используем route для определения активного маршрута (содержит шаблон пути)
+    // route будет содержать /[locale], /[locale]/transfers, /[locale]/tours и т.д.
+    const route = router.route;
+    
+    // Определяем текущий путь на основе route
+    let currentPath = '/';
+    if (route === '/[locale]') {
+      currentPath = '/';
+    } else if (route === '/[locale]/transfers') {
+      currentPath = '/transfers';
+    } else if (route === '/[locale]/tours') {
+      currentPath = '/tours';
+    }
+    
+    // Также проверяем asPath для надежности (убираем query и hash)
+    const asPathClean = router.asPath.split('?')[0].split('#')[0];
+    // Убираем locale из пути (сначала /locale/, потом /locale в конце)
+    let asPathWithoutLocale = asPathClean.replace(`/${locale}/`, '/').replace(`/${locale}`, '') || '/';
+    
+    // Нормализуем asPath: убираем trailing slash (кроме корня)
+    const normalizedAsPath = asPathWithoutLocale !== '/' && asPathWithoutLocale.endsWith('/') 
+      ? asPathWithoutLocale.slice(0, -1) 
+      : asPathWithoutLocale;
+    
+    if (href === "/") {
+      return currentPath === "/" || normalizedAsPath === "/" || normalizedAsPath === "";
+    }
+    return currentPath === href || normalizedAsPath === href;
   };
 
   const scrollToContacts = (e: React.MouseEvent<HTMLAnchorElement>) => {
