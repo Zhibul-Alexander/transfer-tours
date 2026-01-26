@@ -15,8 +15,20 @@ const Header = styled.header`
   top: 0;
   z-index: 20;
   backdrop-filter: blur(10px);
-  background: rgba(248, 250, 252, 0.85);
+  background: rgba(248, 250, 252, 1);
   border-bottom: 1px solid ${(p) => p.theme.colors.border};
+  padding-top: env(safe-area-inset-top);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: env(safe-area-inset-top);
+    background: rgba(248, 250, 252, 1);
+    z-index: -1;
+  }
 `;
 
 const HeaderInner = styled.div`
@@ -180,6 +192,13 @@ const FooterInner = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 `;
 
 const FooterContacts = styled.div`
@@ -188,6 +207,10 @@ const FooterContacts = styled.div`
   gap: 8px;
   font-size: 12px;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 
   a {
     color: ${(p) => p.theme.colors.muted};

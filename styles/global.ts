@@ -3,6 +3,9 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
   *, *::before, *::after { box-sizing: border-box; }
   html, body { padding: 0; margin: 0; }
+  html {
+    background: #F8FAFC;
+  }
   body {
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
     background: radial-gradient(1200px 600px at 20% 0%, rgba(77,163,255,0.08), transparent 60%),

@@ -31,7 +31,8 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta name="theme-color" content="#0B1220" />
+          <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+          <meta name="theme-color" content="#F8FAFC" />
           <link rel="icon" href="/favicon.svg" />
         </Head>
         <body>
