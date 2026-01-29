@@ -75,7 +75,6 @@ const ru: SiteContent = {
           "/images/slider1/tour1-6.webp",
           "/images/slider1/tour1-7.webp",
           "/images/slider1/tour1-8.webp",
-          "/images/slider1/tour1-10.webp",
           "/images/slider1/tour1-11.webp",
         ],
       },
