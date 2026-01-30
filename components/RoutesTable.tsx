@@ -122,10 +122,10 @@ export default function RoutesTable({ content, routes }: Props) {
         <Table>
           <thead>
             <tr>
-              <th>{content.locale === "ru" ? "Откуда" : "From"}</th>
-              <th>{content.locale === "ru" ? "Куда" : "To"}</th>
-              <th>{content.locale === "ru" ? "Транспорт" : "Vehicle"}</th>
-              <th>{content.locale === "ru" ? "Цена от" : "Price from"}</th>
+              <th>{content.locale === "ru" ? "Откуда" : content.locale === "ge" ? "საიდან" : "From"}</th>
+              <th>{content.locale === "ru" ? "Куда" : content.locale === "ge" ? "სად" : "To"}</th>
+              <th>{content.locale === "ru" ? "Транспорт" : content.locale === "ge" ? "ტრანსპორტი" : "Vehicle"}</th>
+              <th>{content.locale === "ru" ? "Цена от" : content.locale === "ge" ? "ფასი დან" : "Price from"}</th>
             </tr>
           </thead>
           <tbody>
@@ -157,7 +157,7 @@ export default function RoutesTable({ content, routes }: Props) {
               <RoutePriceText>{r.priceFrom}</RoutePriceText>
             </RouteHeader>
             <RouteFooter>
-              <RouteLabel>{content.locale === "ru" ? "Транспорт" : "Vehicle"}</RouteLabel>
+              <RouteLabel>{content.locale === "ru" ? "Транспорт" : content.locale === "ge" ? "ტრანსპორტი" : "Vehicle"}</RouteLabel>
               <Badge $variant={r.transport}>
                 {r.transport === "car" ? content.transfers.transportTitles.car : content.transfers.transportTitles.minivan}
               </Badge>

@@ -9,7 +9,7 @@ module.exports = {
   ],
   // Генерируем sitemap для всех локалей
   additionalPaths: async (config) => {
-    const locales = ['ru', 'en'];
+    const locales = ['ru', 'en', 'ge'];
     const paths = [
       { path: '', priority: 1.0, changefreq: 'weekly' }, // Главная страница
       { path: '/transfers', priority: 0.8, changefreq: 'weekly' },

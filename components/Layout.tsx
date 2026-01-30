@@ -63,6 +63,10 @@ const HeaderRow = styled.div`
 
 const MobileBrand = styled.a`
   display: none;
+  color: inherit;
+  text-decoration: none;
+
+  &:visited { color: inherit; text-decoration: none; }
 
   @media (max-width: 768px) {
     display: flex;
@@ -95,6 +99,10 @@ const Brand = styled.a`
   flex-direction: column;
   gap: 2px;
   flex-shrink: 0;
+  color: inherit;
+  text-decoration: none;
+
+  &:visited { color: inherit; text-decoration: none; }
 
   strong {
     font-size: 14px;
@@ -208,6 +216,8 @@ const FooterContacts = styled.div`
   font-size: 12px;
   flex-wrap: wrap;
 
+  a, a:visited { color: inherit; text-decoration: none; }
+
   @media (max-width: 768px) {
     justify-content: center;
   }
@@ -236,7 +246,7 @@ type Props = {
 export default function Layout({ content, children, locale }: Props) {
   const router = useRouter();
 
-  const switchLocale = (nextLocale: "ru" | "en") => {
+  const switchLocale = (nextLocale: "ru" | "en" | "ge") => {
     const currentPath = router.asPath.replace(`/${locale}`, '');
     router.push(`/${nextLocale}${currentPath === '/' ? '' : currentPath}`);
   };
@@ -301,13 +311,14 @@ export default function Layout({ content, children, locale }: Props) {
               <NavLink $active={isActive("/tours")}>{content.nav.tours}</NavLink>
             </Link>
             <NavLink href="#contacts" onClick={scrollToContacts}>
-              {content.locale === "ru" ? "Контакты" : "Contacts"}
+              {content.nav.contacts || (content.locale === "ru" ? "Контакты" : content.locale === "ge" ? "კონტაქტები" : "Contacts")}
             </NavLink>
           </Nav>
 
           <Lang>
             <LangBtn onClick={() => switchLocale("ru")} $active={locale === "ru"}>RU</LangBtn>
             <LangBtn onClick={() => switchLocale("en")} $active={locale === "en"}>EN</LangBtn>
+            <LangBtn onClick={() => switchLocale("ge")} $active={locale === "ge"}>GE</LangBtn>
           </Lang>
 
           <HeaderRow>
@@ -320,6 +331,7 @@ export default function Layout({ content, children, locale }: Props) {
             <MobileLang>
               <LangBtn onClick={() => switchLocale("ru")} $active={locale === "ru"}>RU</LangBtn>
               <LangBtn onClick={() => switchLocale("en")} $active={locale === "en"}>EN</LangBtn>
+              <LangBtn onClick={() => switchLocale("ge")} $active={locale === "ge"}>GE</LangBtn>
             </MobileLang>
           </HeaderRow>
         </HeaderInner>

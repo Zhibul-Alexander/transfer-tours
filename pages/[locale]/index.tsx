@@ -31,16 +31,16 @@ export default function Home({ content, locale }: Props) {
         <Section>
           <Grid2>
             <Card>
-              <H2>{content.locale === "ru" ? "Почему удобно" : "Why it's easy"}</H2>
+              <H2>{content.home.whyTitle || (content.locale === "ru" ? "Почему удобно" : content.locale === "ge" ? "რატომ მოსახერხებელია" : "Why it's easy")}</H2>
               <List>
                 {content.home.bullets.map((b, i) => <li key={i}>{b}</li>)}
               </List>
             </Card>
             <Card>
-              <H2>{content.locale === "ru" ? "Быстрые ссылки" : "Quick links"}</H2>
-              <P>{content.locale === "ru"
+              <H2>{content.home.quickLinksTitle || (content.locale === "ru" ? "Быстрые ссылки" : content.locale === "ge" ? "სწრაფი ბმულები" : "Quick links")}</H2>
+              <P>{content.home.quickLinksHint || (content.locale === "ru"
                 ? "Открой нужный раздел."
-                : "Open what you need — routes/prices or tours."}</P>
+                : content.locale === "ge" ? "გახსენით საჭირო განყოფილება." : "Open what you need — routes/prices or tours.")}</P>
               <div style={{ display: "grid", gap: 12 }}>
                 {content.home.cards.map((c) => (
                   <LinkCard key={c.href} href={`/${locale}${c.href}`} title={c.title} text={c.text} locale={content.locale} />
@@ -70,6 +70,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: [
       { params: { locale: 'ru' } },
       { params: { locale: 'en' } },
+      { params: { locale: 'ge' } },
     ],
     fallback: false,
   };

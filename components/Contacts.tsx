@@ -32,6 +32,8 @@ const RowLink = styled.div`
     color: #4DA3FF; 
     text-decoration: none;
     
+    &:visited { color: #4DA3FF; }
+    
     &:hover {
       text-decoration: underline;
     }
@@ -48,6 +50,8 @@ const ContactRow = styled.div`
   a { 
     color: #4DA3FF; 
     text-decoration: none;
+    
+    &:visited { color: #4DA3FF; }
     
     &:hover {
       text-decoration: underline;
@@ -83,21 +87,21 @@ export default function Contacts({ data, content }: Props) {
           {data.telegramReviews && (
             <RowLink>
               <a href={data.telegramReviews} target="_blank" rel="noreferrer">
-                {labels.reviews || (content.locale === "ru" ? "Отзывы" : "Reviews")}
+                {labels.reviews || (content.locale === "ru" ? "Отзывы" : content.locale === "ge" ? "შეფასებები" : "Reviews")}
               </a>
             </RowLink>
           )}
           {data.telegramChooseCar && (
             <RowLink>
               <a href={data.telegramChooseCar} target="_blank" rel="noreferrer">
-                {labels.chooseCar || (content.locale === "ru" ? "Можно выбрать машину" : "Choose a car")}
+                {labels.chooseCar || (content.locale === "ru" ? "Можно выбрать машину" : content.locale === "ge" ? "შეგიძლიათ აირჩიოთ მანქანა" : "Choose a car")}
               </a>
             </RowLink>
           )}
           {data.telegramTours && (
             <RowLink>
               <a href={data.telegramTours} target="_blank" rel="noreferrer">
-                {labels.tours || (content.locale === "ru" ? "Программы экскурсий" : "Tour programs")}
+                {labels.tours || (content.locale === "ru" ? "Программы экскурсий" : content.locale === "ge" ? "ექსკურსიების პროგრამები" : "Tour programs")}
               </a>
             </RowLink>
           )}

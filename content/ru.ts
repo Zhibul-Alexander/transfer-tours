@@ -6,7 +6,7 @@ const ru: SiteContent = {
     name: "Georgia Transfers & Tours",
     tagline: "Трансферы, перевозки и экскурсии по Грузии — быстро, комфортно и без лишних вопросов.",
   },
-  nav: { home: "Главная", transfers: "Трансферы", tours: "Экскурсии" },
+  nav: { home: "Главная", transfers: "Трансферы", tours: "Экскурсии", contacts: "Контакты" },
   cta: {
     primary: "Написать в Telegram",
     secondary: "Написать в WhatsApp",
@@ -24,6 +24,9 @@ const ru: SiteContent = {
       { title: "Трансферы и перевозки", text: "", href: "/transfers" },
       { title: "Экскурсии по Грузии", text: "", href: "/tours" },
     ],
+    whyTitle: "Почему удобно",
+    quickLinksTitle: "Быстрые ссылки",
+    quickLinksHint: "Открой нужный раздел.",
   },
   transfers: {
     title: "Трансферы и перевозки",

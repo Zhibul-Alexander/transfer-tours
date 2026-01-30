@@ -6,7 +6,7 @@ const en: SiteContent = {
     name: "Georgia Transfers & Tours",
     tagline: "Transfers, passenger transport, and tours across Georgia — fast, comfortable, and hassle-free.",
   },
-  nav: { home: "Home", transfers: "Transfers", tours: "Tours" },
+  nav: { home: "Home", transfers: "Transfers", tours: "Tours", contacts: "Contacts" },
   cta: {
     primary: "Message on Telegram",
     secondary: "Message on WhatsApp",
@@ -14,7 +14,7 @@ const en: SiteContent = {
   home: {
     title: "Transfers and Tours in Georgia",
     subtitle:
-      "Clear pricing, comfortable and clean cars, and quick replies in messengers — you’re always in touch and know what’s going on. We make the trip easy at every step: we quickly accept your request, уточняем детали маршрута и времени, confirm the booking, and arrive exactly where needed. We also organize great tours around Georgia — we’ll match the route to your preferences and show the best places without extra fuss.",
+      "Clear pricing, comfortable and clean cars, and quick replies in messengers — you’re always in touch and know what’s going on. We make the trip easy at every step: we quickly accept your request, confirm route and time details, and confirm the booking, and arrive exactly where needed. We also organize great tours around Georgia — we’ll match the route to your preferences and show the best places without extra fuss.",
     bullets: [
       "We’ve built our reputation for years — only trusted drivers.",
       "Plenty of space for luggage (suitcases, skis/snowboard). No smoking in the car — clean and comfortable.",
@@ -25,6 +25,9 @@ const en: SiteContent = {
       { title: "Transfers and Transport", text: "", href: "/transfers" },
       { title: "Tours in Georgia", text: "", href: "/tours" },
     ],
+    whyTitle: "Why it's easy",
+    quickLinksTitle: "Quick links",
+    quickLinksHint: "Open what you need — routes/prices or tours.",
   },
   transfers: {
     title: "Transfers and Transport",
@@ -162,11 +165,11 @@ const en: SiteContent = {
       },
       {
         name: "Kakheti",
-        description: "Wine region: tastings, wineries, Alazani Valley, and гастротуры.",
+        description: "Wine region: tastings, wineries, Alazani Valley, and food tours.",
       },
       {
         name: "Borjomi",
-        description: "Mineral water, park, forest walks, and a спокойный отдых.",
+        description: "Mineral water, park, forest walks, and a relaxing break.",
       },
       {
         name: "Bakuriani",
@@ -214,7 +217,7 @@ const en: SiteContent = {
       },
       {
         name: "Batumi",
-        description: "Sea, promenade, city walks, and beach отдых.",
+        description: "Sea, promenade, city walks, and beach relaxation.",
       },
       {
         name: "Mountain Adjara",

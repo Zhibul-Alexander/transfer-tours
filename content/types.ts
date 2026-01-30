@@ -38,15 +38,18 @@ export type Contacts = {
 };
 
 export type SiteContent = {
-  locale: "ru" | "en";
+  locale: "ru" | "en" | "ge";
   brand: { name: string; tagline: string; };
-  nav: { home: string; transfers: string; tours: string; };
+  nav: { home: string; transfers: string; tours: string; contacts?: string; };
   cta: { primary: string; secondary: string; };
   home: {
     title: string;
     subtitle: string;
     bullets: string[];
     cards: Array<{ title: string; text: string; href: string; }>;
+    whyTitle?: string;
+    quickLinksTitle?: string;
+    quickLinksHint?: string;
   };
   transfers: {
     title: string;

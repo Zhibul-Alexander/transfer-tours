@@ -34,7 +34,7 @@ export default function LinkCard({ href, title, text, locale }: Props) {
         <Title>{title}</Title>
         {text && <Text>{text}</Text>}
         <div style={{ fontSize: 12, color: "#4DA3FF" }}>
-          {locale === "ru" ? "Открыть" : "Open"} →
+          {locale === "ru" ? "Открыть" : locale === "ge" ? "გახსნა" : "Open"} →
         </div>
       </Card>
     </Link>

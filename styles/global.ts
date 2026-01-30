@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
     color: #1E293B;
   }
   a { color: inherit; text-decoration: none; }
+  a:visited { color: inherit; }
   img { max-width: 100%; display: block; }
   ::selection { background: rgba(77,163,255,0.2); }
 `;
