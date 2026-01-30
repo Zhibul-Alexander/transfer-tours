@@ -103,7 +103,7 @@ export default function Contacts({ data, content }: Props) {
           )}
         </Column>
 
-        {/* Колонка 2: Instagram, Facebook, VK, Email */}
+        {/* Колонка 2: Instagram, Facebook, Email */}
         <Column>
           {data.instagram && (
             <RowLink>
@@ -113,11 +113,6 @@ export default function Contacts({ data, content }: Props) {
           {data.facebook && (
             <RowLink>
               <a href={data.facebook} target="_blank" rel="noreferrer">Facebook</a>
-            </RowLink>
-          )}
-          {data.vk && (
-            <RowLink>
-              <a href={data.vk} target="_blank" rel="noreferrer">VK</a>
             </RowLink>
           )}
           {data.email && (

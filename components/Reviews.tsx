@@ -38,7 +38,7 @@ const Text = styled.div`
 type Props = { items: Review[] };
 
 export default function Reviews({ items }: Props) {
-  const reviewsChannelLink = "https://t.me/SergBushin1984";
+  const reviewsChannelLink = "https://t.me/alexander_zhh";
   
   return (
     <Grid>
