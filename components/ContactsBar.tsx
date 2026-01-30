@@ -54,9 +54,16 @@ const Btn = styled.a<{ $variant?: "primary" | "secondary" }>`
   border: 1px solid rgba(77,163,255,0.4);
   background: rgba(77,163,255,0.12);
   color: ${(p) => p.theme.colors.text};
+  white-space: nowrap;
+  text-align: center;
 
   &:hover {
     filter: brightness(0.95);
+  }
+
+  @media (max-width: 400px) {
+    padding: 8px 10px;
+    font-size: 11px;
   }
 `;
 

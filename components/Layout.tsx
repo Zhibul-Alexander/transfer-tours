@@ -128,10 +128,11 @@ const Nav = styled.nav`
   gap: 10px;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 
   @media (max-width: 768px) {
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
     gap: 8px;
     order: 2;
   }
@@ -147,14 +148,15 @@ const NavLink = styled.a<{ $active?: boolean }>`
   transition: transform 0.1s ease;
   text-decoration: none;
   white-space: nowrap;
+  flex-shrink: 0;
 
   &:hover { transform: translateY(-1px); }
 
   @media (max-width: 768px) {
-    flex: 1;
+    flex: 0 0 auto;
     text-align: center;
-    padding: 10px 8px;
-    font-size: 12px;
+    padding: 6px 8px;
+    font-size: 11px;
   }
 `;
 
