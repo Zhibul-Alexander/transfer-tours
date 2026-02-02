@@ -65,64 +65,25 @@ const ContactRow = styled.div`
 
 type Props = { data: C; content: SiteContent };
 
-export default function Contacts({ data, content }: Props) {
-  const labels = content.contacts.labels || {};
-  
+export default function Contacts({ data }: Props) {
   return (
     <Card>
       <Grid>
-        {/* Колонка 1: Телефон | Telegram | WhatsApp, Отзывы, Можно выбрать машину, Программы экскурсий */}
         <Column>
           <ContactRow>
-            {data.phone && (
-              <>
-                <span>{data.phone}</span>
-                <span>|</span>
-              </>
-            )}
+            <span>+995 574 408 533</span>
+            <span>|</span>
             <a href={data.telegram} target="_blank" rel="noreferrer">Telegram</a>
+          </ContactRow>
+          <ContactRow>
+            <span>+995 577 368 489</span>
             <span>|</span>
             <a href={data.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>
           </ContactRow>
-          {data.telegramReviews && (
-            <RowLink>
-              <a href={data.telegramReviews} target="_blank" rel="noreferrer">
-                {labels.reviews || (content.locale === "ru" ? "Отзывы" : content.locale === "ge" ? "შეფასებები" : "Reviews")}
-              </a>
-            </RowLink>
-          )}
-          {data.telegramChooseCar && (
-            <RowLink>
-              <a href={data.telegramChooseCar} target="_blank" rel="noreferrer">
-                {labels.chooseCar || (content.locale === "ru" ? "Можно выбрать машину" : content.locale === "ge" ? "შეგიძლიათ აირჩიოთ მანქანა" : "Choose a car")}
-              </a>
-            </RowLink>
-          )}
-          {data.telegramTours && (
-            <RowLink>
-              <a href={data.telegramTours} target="_blank" rel="noreferrer">
-                {labels.tours || (content.locale === "ru" ? "Программы экскурсий" : content.locale === "ge" ? "ექსკურსიების პროგრამები" : "Tour programs")}
-              </a>
-            </RowLink>
-          )}
-        </Column>
-
-        {/* Колонка 2: Instagram, Facebook, Email */}
-        <Column>
-          {data.instagram && (
-            <RowLink>
-              <a href={data.instagram} target="_blank" rel="noreferrer">Instagram</a>
-            </RowLink>
-          )}
           {data.facebook && (
-            <RowLink>
+            <ContactRow>
               <a href={data.facebook} target="_blank" rel="noreferrer">Facebook</a>
-            </RowLink>
-          )}
-          {data.email && (
-            <RowLink>
-              <a href={`mailto:${data.email}`}>{data.email}</a>
-            </RowLink>
+            </ContactRow>
           )}
         </Column>
       </Grid>

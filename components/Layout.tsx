@@ -78,10 +78,6 @@ const MobileBrand = styled.a`
     font-size: 14px;
     letter-spacing: 0.2px;
   }
-
-  span {
-    display: none;
-  }
 `;
 
 const MobileLang = styled.div`
@@ -107,15 +103,6 @@ const Brand = styled.a`
   strong {
     font-size: 14px;
     letter-spacing: 0.2px;
-  }
-
-  span {
-    font-size: 12px;
-    color: ${(p) => p.theme.colors.muted};
-    
-    @media (max-width: 768px) {
-      display: none;
-    }
   }
 
   @media (max-width: 768px) {
@@ -213,15 +200,15 @@ const FooterInner = styled.div`
 
 const FooterContacts = styled.div`
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
   font-size: 12px;
-  flex-wrap: wrap;
 
   a, a:visited { color: inherit; text-decoration: none; }
 
   @media (max-width: 768px) {
-    justify-content: center;
+    align-items: center;
   }
 
   a {
@@ -347,15 +334,8 @@ export default function Layout({ content, children, locale }: Props) {
         <FooterInner>
           <div>© {new Date().getFullYear()} {content.seo.siteName}</div>
           <FooterContacts>
-            {content.contacts.data.phone && (
-              <>
-                <span>{content.contacts.data.phone}</span>
-                <span>|</span>
-              </>
-            )}
-            <a href={content.contacts.data.telegram} target="_blank" rel="noreferrer">Telegram</a>
-            <span>|</span>
-            <a href={content.contacts.data.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>
+            <div><span>+995 574 408 533</span> <span>|</span> <a href={content.contacts.data.telegram} target="_blank" rel="noreferrer">Telegram</a></div>
+            <div><span>+995 577 368 489</span> <span>|</span> <a href={content.contacts.data.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a></div>
           </FooterContacts>
         </FooterInner>
       </Footer>

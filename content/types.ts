@@ -39,7 +39,7 @@ export type Contacts = {
 
 export type SiteContent = {
   locale: "ru" | "en" | "ge";
-  brand: { name: string; tagline: string; };
+  brand: { name: string; };
   nav: { home: string; transfers: string; tours: string; contacts?: string; };
   cta: { primary: string; secondary: string; };
   home: {

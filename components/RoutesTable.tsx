@@ -116,6 +116,7 @@ type Props = {
 };
 
 export default function RoutesTable({ content, routes }: Props) {
+  const minivanRoutes = routes.filter((r) => r.transport !== "car");
   return (
     <>
       <TableWrap>
@@ -129,7 +130,7 @@ export default function RoutesTable({ content, routes }: Props) {
             </tr>
           </thead>
           <tbody>
-            {routes.map((r, idx) => (
+            {minivanRoutes.map((r, idx) => (
               <tr key={idx}>
                 <td>{r.from}</td>
                 <td>{r.to}</td>
@@ -146,7 +147,7 @@ export default function RoutesTable({ content, routes }: Props) {
       </TableWrap>
 
       <CardsContainer>
-        {routes.map((r, idx) => (
+        {minivanRoutes.map((r, idx) => (
           <RouteCard key={idx}>
             <RouteHeader>
               <RoutePath>

@@ -27,15 +27,28 @@ const Text = styled.div`
 
 type Props = { href: string; title: string; text: string; locale?: string };
 
+const TitleRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+`;
+
+const OpenLink = styled.div`
+  font-size: 12px;
+  color: #4DA3FF;
+`;
+
 export default function LinkCard({ href, title, text, locale }: Props) {
   return (
     <Link href={href} passHref legacyBehavior>
       <Card>
-        <Title>{title}</Title>
+        <TitleRow>
+          <Title>{title}</Title>
+          <OpenLink>{locale === "ru" ? "Открыть" : locale === "ge" ? "გახსნა" : "Open"} →</OpenLink>
+        </TitleRow>
         {text && <Text>{text}</Text>}
-        <div style={{ fontSize: 12, color: "#4DA3FF" }}>
-          {locale === "ru" ? "Открыть" : locale === "ge" ? "გახსნა" : "Open"} →
-        </div>
       </Card>
     </Link>
   );
