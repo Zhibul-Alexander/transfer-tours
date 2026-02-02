@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRef } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { SiteContent } from "../content/types";
@@ -234,6 +235,7 @@ type Props = {
 
 export default function Layout({ content, children, locale }: Props) {
   const router = useRouter();
+  const contactsHighlightingRef = useRef(false);
 
   const switchLocale = (nextLocale: "ru" | "en" | "ge") => {
     const currentPath = router.asPath.replace(`/${locale}`, '');
@@ -274,8 +276,21 @@ export default function Layout({ content, children, locale }: Props) {
   const scrollToContacts = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const contactsSection = document.getElementById("contacts");
+    const contactsBlock = document.getElementById("contacts-block");
     if (contactsSection) {
       contactsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (contactsBlock && !contactsHighlightingRef.current) {
+        contactsHighlightingRef.current = true;
+        contactsBlock.classList.remove("contacts-highlight");
+        const startHighlight = () => {
+          contactsBlock.classList.add("contacts-highlight");
+          setTimeout(() => {
+            contactsBlock.classList.remove("contacts-highlight");
+            contactsHighlightingRef.current = false;
+          }, 2500);
+        };
+        setTimeout(startHighlight, 400);
+      }
     }
   };
 

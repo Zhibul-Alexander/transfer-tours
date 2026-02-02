@@ -67,7 +67,7 @@ type Props = { data: C; content: SiteContent };
 
 export default function Contacts({ data }: Props) {
   return (
-    <Card>
+    <Card id="contacts-block">
       <Grid>
         <Column>
           <ContactRow>

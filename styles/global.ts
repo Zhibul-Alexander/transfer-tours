@@ -17,4 +17,14 @@ export const GlobalStyle = createGlobalStyle`
   a:visited { color: inherit; }
   img { max-width: 100%; display: block; }
   ::selection { background: rgba(77,163,255,0.2); }
+
+  @keyframes contactsHighlight {
+    0% { box-shadow: 0 0 0 0 rgba(77, 163, 255, 0.4); }
+    50% { box-shadow: 0 0 0 12px rgba(77, 163, 255, 0.15); }
+    100% { box-shadow: 0 0 0 0 rgba(77, 163, 255, 0); }
+  }
+
+  #contacts-block.contacts-highlight {
+    animation: contactsHighlight 1s ease-out 2;
+  }
 `;
