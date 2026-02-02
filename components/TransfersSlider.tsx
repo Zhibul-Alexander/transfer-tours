@@ -253,9 +253,9 @@ const Subtitle = styled.p`
   }
 `;
 
-type Props = { subtitle?: string };
+type Props = { subtitle?: string; imageAltPrefix?: string };
 
-export default function TransfersSlider({ subtitle }: Props) {
+export default function TransfersSlider({ subtitle, imageAltPrefix }: Props) {
   const [index, setIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(0);
@@ -342,7 +342,7 @@ export default function TransfersSlider({ subtitle }: Props) {
               <Slide key={src} onClick={() => openModal(i)}>
                 <Image
                   src={src}
-                  alt=""
+                  alt={imageAltPrefix ? `${imageAltPrefix}, ${i + 1}` : `Transfer car, ${i + 1}`}
                   fill
                   sizes="100vw"
                   style={{ objectFit: "contain" }}
@@ -431,7 +431,7 @@ export default function TransfersSlider({ subtitle }: Props) {
             <ModalImageWrapper className="modal-image-wrapper">
               <Image
                 src={images[modalImageIndex]}
-                alt=""
+                alt={imageAltPrefix ? `${imageAltPrefix}, ${modalImageIndex + 1}` : `Transfer car, ${modalImageIndex + 1}`}
                 fill
                 sizes="90vw"
                 style={{ objectFit: "contain" }}

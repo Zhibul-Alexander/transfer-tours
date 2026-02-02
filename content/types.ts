@@ -96,5 +96,11 @@ export type SiteContent = {
     keywords: string[];
     city: string;
     country: string;
+    /** Короткие title и description для meta (до ~60 и ~155 символов) */
+    pages?: {
+      home: { title: string; description: string };
+      transfers: { title: string; description: string };
+      tours: { title: string; description: string };
+    };
   };
 };

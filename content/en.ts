@@ -268,6 +268,20 @@ const en: SiteContent = {
     keywords: ["transfer georgia", "tbilisi gudauri transfer", "tours in georgia", "transport georgia", "transfer georgia", "georgia tours"],
     city: "Tbilisi",
     country: "Georgia",
+    pages: {
+      home: {
+        title: "Transfers and Tours in Georgia",
+        description: "Transfers Tbilisi — Gudauri, Bakuriani, Vladikavkaz. Tours in Georgia. Prices, routes. Telegram, WhatsApp.",
+      },
+      transfers: {
+        title: "Transfers and Transport",
+        description: "Transfer prices: Tbilisi — Gudauri, Bakuriani, Vladikavkaz. Cars and minivans. Book via messengers.",
+      },
+      tours: {
+        title: "Tours in Georgia",
+        description: "Tours: Kazbegi, Mtskheta, Uplistsikhe, Borjomi and more. Routes, photos. Trip organization in Georgia.",
+      },
+    },
   },
 };
 

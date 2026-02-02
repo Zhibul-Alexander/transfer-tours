@@ -17,15 +17,19 @@ export default function Home({ content, locale }: Props) {
   const router = useRouter();
   const path = router.asPath;
 
+  const pageSeo = content.seo.pages?.home;
   return (
     <Layout content={content} locale={locale}>
-      <Seo content={content} path={path} />
+      <Seo
+        content={content}
+        title={pageSeo?.title}
+        description={pageSeo?.description}
+        path={path}
+      />
       <Container>
         <Hero
           title={content.home.title}
           subtitle={content.home.subtitle}
-          imageSrc="/images/hero-home.jpg"
-          imageAlt="Transfers and tours"
         />
 
         <Section>

@@ -13,23 +13,29 @@ export default class MyDocument extends Document {
         });
 
       const initialProps = await Document.getInitialProps(ctx);
+      const pathname = ctx.pathname ?? "";
       return {
         ...initialProps,
+        pathname,
         styles: (
           <>
             {initialProps.styles}
             {sheet.getStyleElement()}
           </>
         ),
-      };
+      } as DocumentInitialProps & { pathname: string };
     } finally {
       sheet.seal();
     }
   }
 
   render() {
+    const pathname = (this.props as { pathname?: string }).pathname ?? "";
+    const locale = pathname.split("/")[1];
+    const lang = locale === "ge" ? "ka" : locale === "en" || locale === "ru" ? locale : "ru";
+
     return (
-      <Html>
+      <Html lang={lang}>
         <Head>
           <meta name="theme-color" content="#F8FAFC" />
           <link rel="icon" href="/favicon.svg" />

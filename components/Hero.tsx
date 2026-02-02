@@ -33,8 +33,6 @@ const Sub = styled.p`
 type Props = {
   title: string;
   subtitle: string;
-  imageSrc?: string;
-  imageAlt?: string;
 };
 
 export default function Hero({ title, subtitle }: Props) {

@@ -17,16 +17,14 @@ export default function ToursPage({ content, locale }: Props) {
     <Layout content={content} locale={locale}>
       <Seo
         content={content}
-        title={content.tours.title}
-        description={content.tours.subtitle}
+        title={content.seo.pages?.tours.title ?? content.tours.title}
+        description={content.seo.pages?.tours.description ?? content.tours.subtitle}
         path={`/${locale}/tours`}
       />
       <Container>
         <Hero
           title={content.tours.title}
           subtitle={content.tours.subtitle}
-          imageSrc="/images/hero-home.jpg"
-          imageAlt="Tours"
         />
 
         <Section>

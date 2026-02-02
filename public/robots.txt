@@ -3,9 +3,10 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /_next/
+Disallow: /404
 
 # Host
-Host: https://example.com
+Host: https://georgia-transfer.com
 
 # Sitemaps
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://georgia-transfer.com/sitemap.xml

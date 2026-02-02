@@ -18,19 +18,20 @@ export default function TransfersPage({ content, locale }: Props) {
     <Layout content={content} locale={locale}>
       <Seo
         content={content}
-        title={content.transfers.title}
-        description={content.transfers.subtitle}
+        title={content.seo.pages?.transfers.title ?? content.transfers.title}
+        description={content.seo.pages?.transfers.description ?? content.transfers.subtitle}
         path={`/${locale}/transfers`}
       />
       <Container>
         <Hero
           title={content.transfers.title}
           subtitle={content.transfers.subtitle}
-          imageSrc="/images/hero-home.jpg"
-          imageAlt="Transfers"
         />
 
-        <TransfersSlider subtitle={content.transfers.sliderSubtitle} />
+        <TransfersSlider
+          subtitle={content.transfers.sliderSubtitle}
+          imageAltPrefix={content.transfers.transportTitles.car}
+        />
 
         <Section>
           <H2>{content.transfers.routeTitle}</H2>
