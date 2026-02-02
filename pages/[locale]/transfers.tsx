@@ -7,6 +7,7 @@ import { Card, Grid2, H2, List, P, Section } from "../../components/Section";
 import RoutesTable from "../../components/RoutesTable";
 import Reviews from "../../components/Reviews";
 import Contacts from "../../components/Contacts";
+import TransfersSlider from "../../components/TransfersSlider";
 import { getContent } from "../../content/getContent";
 import { SiteContent } from "../../content/types";
 
@@ -28,6 +29,8 @@ export default function TransfersPage({ content, locale }: Props) {
           imageSrc="/images/hero-home.jpg"
           imageAlt="Transfers"
         />
+
+        <TransfersSlider subtitle={content.transfers.sliderSubtitle} />
 
         <Section>
           <H2>{content.transfers.routeTitle}</H2>

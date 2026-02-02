@@ -31,6 +31,7 @@ const en: SiteContent = {
     title: "Transfers and Transport",
     subtitle:
       "Transparent pricing and neat, comfortable vehicles — no unnecessary hassle. We reply quickly in messengers: confirm details, lock in the time and address, and confirm the ride. The car arrives on time, there’s enough trunk space for suitcases and gear, and the cabin is always clean.",
+    sliderSubtitle: "Different car options available. To clarify — message us.",
     routeTitle: "Popular routes and prices",
     routeHint:
       "Prices are shown as “from” and depend on season, time, and number of passengers. For an exact price — message us.",
@@ -38,8 +39,8 @@ const en: SiteContent = {
     routes: [
       { from: "Tbilisi", to: "Gudauri", transport: "car", priceFrom: "from 160 ₾" },
       { from: "Tbilisi", to: "Bakuriani", transport: "car", priceFrom: "from 210 ₾" },
-      { from: "Vladikavkaz", to: "Gudauri", transport: "car", priceFrom: "8 000 ₽" },
       { from: "Tbilisi", to: "Vladikavkaz", transport: "car", priceFrom: "11 000 ₽" },
+      { from: "Vladikavkaz", to: "Gudauri", transport: "car", priceFrom: "8 000 ₽" },
       { from: "Tbilisi", to: "Gudauri", transport: "minivan", priceFrom: "from 250 ₾" },
       { from: "Tbilisi", to: "Bakuriani", transport: "minivan", priceFrom: "from 300 ₾" },
       { from: "Vladikavkaz", to: "Gudauri", transport: "minivan", priceFrom: "from 12 000 ₽" },

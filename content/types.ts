@@ -54,6 +54,7 @@ export type SiteContent = {
   transfers: {
     title: string;
     subtitle: string;
+    sliderSubtitle?: string;
     routeTitle: string;
     routeHint: string;
     routes: RoutePrice[];
