@@ -111,24 +111,25 @@ const Brand = styled.a`
   }
 `;
 
-const Nav = styled.nav`
+const Nav = styled.nav<{ $locale?: string }>`
   display: flex;
-  gap: 10px;
+  gap: ${(p) => (p.$locale === "ge" ? "6px" : "10px")};
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: ${(p) => (p.$locale === "ge" ? "nowrap" : "wrap")};
 
   @media (max-width: 768px) {
     width: 100%;
     justify-content: center;
-    gap: 8px;
+    gap: ${(p) => (p.$locale === "ge" ? "4px" : "8px")};
     order: 2;
+    flex-wrap: ${(p) => (p.$locale === "ge" ? "nowrap" : "wrap")};
   }
 `;
 
-const NavLink = styled.a<{ $active?: boolean }>`
-  font-size: 13px;
-  padding: 8px 10px;
+const NavLink = styled.a<{ $active?: boolean; $locale?: string }>`
+  font-size: ${(p) => (p.$locale === "ge" ? "11px" : "13px")};
+  padding: ${(p) => (p.$locale === "ge" ? "6px 8px" : "8px 10px")};
   border-radius: 12px;
   border: 1px solid ${(p) => (p.$active ? "rgba(77,163,255,0.4)" : p.theme.colors.border)};
   background: ${(p) => (p.$active ? "rgba(77,163,255,0.12)" : "transparent")};
@@ -143,7 +144,7 @@ const NavLink = styled.a<{ $active?: boolean }>`
   @media (max-width: 768px) {
     flex: 0 0 auto;
     text-align: center;
-    padding: 6px 8px;
+    padding: ${(p) => (p.$locale === "ge" ? "4px 5px" : "6px 8px")};
     font-size: 11px;
   }
 `;
@@ -287,7 +288,7 @@ export default function Layout({ content, children, locale }: Props) {
           setTimeout(() => {
             contactsBlock.classList.remove("contacts-highlight");
             contactsHighlightingRef.current = false;
-          }, 2500);
+          }, 3000);
         };
         setTimeout(startHighlight, 400);
       }
@@ -300,42 +301,42 @@ export default function Layout({ content, children, locale }: Props) {
         <HeaderInner>
           <Link href={`/${locale}`} passHref legacyBehavior>
             <Brand>
-              <strong>{content.brand.name}</strong>
+              <strong style={{ whiteSpace: "pre-line", fontSize: "13px" }}>{content.brand.name}</strong>
             </Brand>
           </Link>
 
-          <Nav>
+          <Nav $locale={locale}>
             <Link href={`/${locale}`} passHref legacyBehavior>
-              <NavLink $active={isActive("/")}>{content.nav.home}</NavLink>
+              <NavLink $active={isActive("/")} $locale={locale}>{content.nav.home}</NavLink>
             </Link>
             <Link href={`/${locale}/transfers`} passHref legacyBehavior>
-              <NavLink $active={isActive("/transfers")}>{content.nav.transfers}</NavLink>
+              <NavLink $active={isActive("/transfers")} $locale={locale}>{content.nav.transfers}</NavLink>
             </Link>
             <Link href={`/${locale}/tours`} passHref legacyBehavior>
-              <NavLink $active={isActive("/tours")}>{content.nav.tours}</NavLink>
+              <NavLink $active={isActive("/tours")} $locale={locale}>{content.nav.tours}</NavLink>
             </Link>
-            <NavLink href="#contacts" onClick={scrollToContacts}>
+            <NavLink href="#contacts" onClick={scrollToContacts} $locale={locale}>
               {content.nav.contacts || (content.locale === "ru" ? "Контакты" : content.locale === "ge" ? "კონტაქტები" : "Contacts")}
             </NavLink>
           </Nav>
 
           <Lang>
             <LangBtn onClick={() => switchLocale("ru")} $active={locale === "ru"}>RU</LangBtn>
-            <LangBtn onClick={() => switchLocale("en")} $active={locale === "en"}>EN</LangBtn>
             <LangBtn onClick={() => switchLocale("ge")} $active={locale === "ge"}>GE</LangBtn>
+            <LangBtn onClick={() => switchLocale("en")} $active={locale === "en"}>EN</LangBtn>
           </Lang>
 
           <HeaderRow>
             <Link href={`/${locale}`} passHref legacyBehavior>
               <MobileBrand>
-                <strong>{content.brand.name}</strong>
+                <strong style={{ whiteSpace: "pre-line", fontSize: "13px"}}>{content.brand.name}</strong>
               </MobileBrand>
             </Link>
 
             <MobileLang>
               <LangBtn onClick={() => switchLocale("ru")} $active={locale === "ru"}>RU</LangBtn>
-              <LangBtn onClick={() => switchLocale("en")} $active={locale === "en"}>EN</LangBtn>
               <LangBtn onClick={() => switchLocale("ge")} $active={locale === "ge"}>GE</LangBtn>
+              <LangBtn onClick={() => switchLocale("en")} $active={locale === "en"}>EN</LangBtn>
             </MobileLang>
           </HeaderRow>
         </HeaderInner>
